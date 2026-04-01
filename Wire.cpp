@@ -51,24 +51,4 @@ void Wire::printHistory() const {
         label = name;
     }
     cout << label << "\t" << history << endl;
-}    return index;
-}
-
-const vector<Gate*>& Wire::getDrives() const {
-    return drives;
-}
-
-string Wire::getHistory() const {
-    return history;
-}
-
-
-void Wire::printHistory() const {
-    string label;
-    if (name.empty()) {
-        label = "Wire" + to_string(index);
-    } else {
-        label = name;
-    }
-    cout << label << "\t" << history << endl;
 }
