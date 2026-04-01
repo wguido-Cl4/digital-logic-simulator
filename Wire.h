@@ -34,4 +34,4 @@ private:
     string         history;
 };
 
-#endif // WIRE_H#endif // WIRE_H
+#endif // WIRE_H
