@@ -1,3 +1,5 @@
+\\By William Guido and Brendon Premkumar
+
 #ifndef WIRE_H
 #define WIRE_H
 
