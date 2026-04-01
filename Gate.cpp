@@ -3,11 +3,10 @@
 
 using namespace std;
 
-
-Gate::Gate(const string& type, int delay, Wire* input1, Wire* input2, Wire* output)
-    : type(type), delay(delay), output(output) {
-    inputs_[0] = input1;
-    inputs_[1] = input2;
+Gate::Gate(const string& gateType, int gateDelay, Wire* input1, Wire* input2, Wire* gateOutput)
+    : type(gateType), delay(gateDelay), output(gateOutput) {
+    inputs[0] = input1;
+    inputs[1] = input2;
 }
 
 string Gate::getType() const {
@@ -52,12 +51,10 @@ char Gate::triXOR(char a, char b) const {
     }
     if (a != b) {
         return '1';
-    }
-    else {
+    } else {
         return '0';
     }
 }
-
 
 char Gate::evaluate() const {
     char a = inputs[0] ? inputs[0]->getValue() : 'X';
