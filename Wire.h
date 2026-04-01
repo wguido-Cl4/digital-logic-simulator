@@ -16,7 +16,7 @@ public:
     void setValue(char val);
     void setName(const string& name);
     void addDrivenGate(Gate* gate);
-    void writeHistory(char symbol);
+    void appendHistory(char symbol);
 
     char getValue() const;
     string getName() const;
@@ -34,4 +34,4 @@ private:
     string         history;
 };
 
-#endif // WIRE_H
+#endif // WIRE_H#endif // WIRE_H
