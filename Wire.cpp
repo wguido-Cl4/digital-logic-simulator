@@ -4,9 +4,8 @@
 using namespace std;
 
 Wire::Wire(int index, const string& name, char value)
-    : index_(index), name_(name), value_(value) {
+    : index(index), name(name), value(value) {
 }
-
 
 void Wire::setValue(char val) {
     value = val;
@@ -24,7 +23,6 @@ void Wire::appendHistory(char symbol) {
     history += symbol;
 }
 
-
 char Wire::getValue() const {
     return value;
 }
@@ -35,6 +33,25 @@ string Wire::getName() const {
 
 int Wire::getIndex() const {
     return index;
+}
+
+const vector<Gate*>& Wire::getDrives() const {
+    return drives;
+}
+
+string Wire::getHistory() const {
+    return history;
+}
+
+void Wire::printHistory() const {
+    string label;
+    if (name.empty()) {
+        label = "Wire" + to_string(index);
+    } else {
+        label = name;
+    }
+    cout << label << "\t" << history << endl;
+}    return index;
 }
 
 const vector<Gate*>& Wire::getDrives() const {
