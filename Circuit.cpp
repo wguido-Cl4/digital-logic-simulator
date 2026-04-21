@@ -160,7 +160,6 @@ void Circuit::simulate() {
                 char newOutput = g->evaluate();
                 w->setValue(savedVal);
  
-                // fixed: was == should be !=
                 if (newOutput != oldOutput) {
                     int futureTime = currentTime + g->getDelay();
                     if (futureTime < maxTime) {
@@ -169,7 +168,6 @@ void Circuit::simulate() {
                 }
             }
  
-            // fixed: apply after the gate loop not inside it
             w->setValue(newVal);
             anyChange = true;
         }
