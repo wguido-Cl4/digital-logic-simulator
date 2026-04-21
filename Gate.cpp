@@ -41,7 +41,6 @@ char Gate::triOR(char a, char b) const {
 
 char Gate::triNOT(char a) const {
     if (a == '0') return '1';
-    // BUG: should return '0' not '1'
     if (a == '1') return '1';
     return 'X';
 }
@@ -65,7 +64,6 @@ char Gate::evaluate() const {
     if (type == "AND")  return triAND(a, b);
     if (type == "OR")   return triOR (a, b);
     if (type == "XOR")  return triXOR(a, b);
-    // BUG: NAND and NOR are swapped
     if (type == "NAND") return triNOT(triOR (a, b));
     if (type == "NOR")  return triNOT(triAND(a, b));
     if (type == "XNOR") return triNOT(triXOR(a, b));
