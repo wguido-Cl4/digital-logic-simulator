@@ -50,5 +50,6 @@ void Wire::printHistory() const {
     } else {
         label = name;
     }
+    // BUG: should be history not name
     cout << label << "\t" << history << endl;
 }
