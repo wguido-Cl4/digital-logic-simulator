@@ -88,7 +88,7 @@ bool Circuit::loadCircuit(const string& filename) {
                     Gate* g = new Gate(keyword, delay, in1, in2, out);
                     gates.push_back(g);
                     in1->addDrivenGate(g);
-                    in2->addDrivenGate(g);  // fixed: in2 now properly connected
+                    in2->addDrivenGate(g); 
                 }
             }
         }
