@@ -5,26 +5,37 @@
 using namespace std;
 
 int main() {
-    string circuitFile, vectorFile;
+    cout << "Press <ENTER> only at prompt to quit program." << endl;
 
-    cout << "Enter circuit file name: ";
-    cin >> circuitFile;
+    while (true) {
+        cout << "What is the name of the circuit test file (base name only):  ";
+        string baseName;
+        getline(cin, baseName);
 
-    cout << "Enter vector file name: ";
-    cin >> vectorFile;
+        if (baseName.empty()) {
+            break;
+        }
 
-    Circuit circuit;
+        string circuitFile = baseName + ".txt";
+        string vectorFile  = baseName + "_v.txt";
 
-    if (!circuit.loadCircuit(circuitFile)) {
-        return 1;
+        cout << "\nSimulating " << circuitFile << ".\n" << endl;
+
+        Circuit circuit;
+
+        if (!circuit.loadCircuit(circuitFile)) {
+            continue;
+        }
+
+        if (!circuit.loadVector(vectorFile)) {
+            continue;
+        }
+
+        circuit.simulate();
+        circuit.printResults();
+
+        cout << endl;
     }
-
-    if (!circuit.loadVector(vectorFile)) {
-        return 1;
-    }
-
-    circuit.simulate();
-    circuit.printResults();
 
     return 0;
 }
