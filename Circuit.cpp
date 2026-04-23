@@ -75,109 +75,27 @@ bool Circuit::loadCircuit(const string& filename) {
             Gate* g = new Gate(type, delay, inWire, nullptr, outWire);
             gates.push_back(g);
             inWire->addDrivenGate(g);
-
-        } else if (type == "AND") {
-            string delayStr = "";
-            ss >> delayStr;
-            int delay = 0;
-            istringstream ds(delayStr);
-            ds >> delay;
-
-            int w1 = 0, w2 = 0, wout = 0;
-            ss >> w1 >> w2 >> wout;
-            Wire* inWire1 = getOrCreateWire(w1);
-            Wire* inWire2 = getOrCreateWire(w2);
-            Wire* outWire = getOrCreateWire(wout);
-            Gate* g = new Gate(type, delay, inWire1, inWire2, outWire);
-            gates.push_back(g);
-            inWire1->addDrivenGate(g);
-            inWire2->addDrivenGate(g);
-
-        } else if (type == "OR") {
-            string delayStr = "";
-            ss >> delayStr;
-            int delay = 0;
-            istringstream ds(delayStr);
-            ds >> delay;
-
-            int w1 = 0, w2 = 0, wout = 0;
-            ss >> w1 >> w2 >> wout;
-            Wire* inWire1 = getOrCreateWire(w1);
-            Wire* inWire2 = getOrCreateWire(w2);
-            Wire* outWire = getOrCreateWire(wout);
-            Gate* g = new Gate(type, delay, inWire1, inWire2, outWire);
-            gates.push_back(g);
-            inWire1->addDrivenGate(g);
-            inWire2->addDrivenGate(g);
-
-        } else if (type == "XOR") {
-            string delayStr = "";
-            ss >> delayStr;
-            int delay = 0;
-            istringstream ds(delayStr);
-            ds >> delay;
-
-            int w1 = 0, w2 = 0, wout = 0;
-            ss >> w1 >> w2 >> wout;
-            Wire* inWire1 = getOrCreateWire(w1);
-            Wire* inWire2 = getOrCreateWire(w2);
-            Wire* outWire = getOrCreateWire(wout);
-            Gate* g = new Gate(type, delay, inWire1, inWire2, outWire);
-            gates.push_back(g);
-            inWire1->addDrivenGate(g);
-            inWire2->addDrivenGate(g);
-
-        } else if (type == "NAND") {
-            string delayStr = "";
-            ss >> delayStr;
-            int delay = 0;
-            istringstream ds(delayStr);
-            ds >> delay;
-
-            int w1 = 0, w2 = 0, wout = 0;
-            ss >> w1 >> w2 >> wout;
-            Wire* inWire1 = getOrCreateWire(w1);
-            Wire* inWire2 = getOrCreateWire(w2);
-            Wire* outWire = getOrCreateWire(wout);
-            Gate* g = new Gate(type, delay, inWire1, inWire2, outWire);
-            gates.push_back(g);
-            inWire1->addDrivenGate(g);
-            inWire2->addDrivenGate(g);
-
-        } else if (type == "NOR") {
-            string delayStr = "";
-            ss >> delayStr;
-            int delay = 0;
-            istringstream ds(delayStr);
-            ds >> delay;
-
-            int w1 = 0, w2 = 0, wout = 0;
-            ss >> w1 >> w2 >> wout;
-            Wire* inWire1 = getOrCreateWire(w1);
-            Wire* inWire2 = getOrCreateWire(w2);
-            Wire* outWire = getOrCreateWire(wout);
-            Gate* g = new Gate(type, delay, inWire1, inWire2, outWire);
-            gates.push_back(g);
-            inWire1->addDrivenGate(g);
-            inWire2->addDrivenGate(g);
-
-        } else if (type == "XNOR") {
-            string delayStr = "";
-            ss >> delayStr;
-            int delay = 0;
-            istringstream ds(delayStr);
-            ds >> delay;
-
-            int w1 = 0, w2 = 0, wout = 0;
-            ss >> w1 >> w2 >> wout;
-            Wire* inWire1 = getOrCreateWire(w1);
-            Wire* inWire2 = getOrCreateWire(w2);
-            Wire* outWire = getOrCreateWire(wout);
-            Gate* g = new Gate(type, delay, inWire1, inWire2, outWire);
-            gates.push_back(g);
-            inWire1->addDrivenGate(g);
-            inWire2->addDrivenGate(g);
         }
+        else if (type == "AND" || type == "OR"  || type == "XOR" ||
+               type == "NAND"|| type == "NOR" || type == "XNOR") {
+
+        string delayStr = "";
+        ss >> delayStr;
+        int delay = 0;
+        istringstream ds(delayStr);
+        ds >> delay;
+
+        int w1 = 0, w2 = 0, wout = 0;
+        ss >> w1 >> w2 >> wout;
+        Wire* inWire1 = getOrCreateWire(w1);
+        Wire* inWire2 = getOrCreateWire(w2);
+        Wire* outWire = getOrCreateWire(wout);
+        Gate* g = new Gate(type, delay, inWire1, inWire2, outWire);
+        gates.push_back(g);
+        inWire1->addDrivenGate(g);
+        inWire2->addDrivenGate(g);
+               }
+
     }
 
     inFile.close();
@@ -233,17 +151,6 @@ bool Circuit::loadVector(const string& filename) {
 void Circuit::simulate() {
     int currentTime = 0;
     int maxTime = 60;
-
-    for (int i = 0; i < inputPads.size(); i++) {
-        if (inputPads[i] != nullptr) {
-            inputPads[i]->appendHistory('X');
-        }
-    }
-    for (int i = 0; i < outputPads.size(); i++) {
-        if (outputPads[i] != nullptr) {
-            outputPads[i]->appendHistory('X');
-        }
-    }
 
     while (currentTime < maxTime) {
         bool anyChange = false;
